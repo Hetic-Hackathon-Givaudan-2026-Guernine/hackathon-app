@@ -1,39 +1,35 @@
-type Health = { status: string; db: string };
 type Question = { id: number; question: string; answer: string };
 
-const healthElement = document.querySelector<HTMLElement>('#health');
-const questionsElement = document.querySelector<HTMLUListElement>('#questions');
-
-if (!healthElement || !questionsElement) {
-  throw new Error('The page is missing the health or questions element');
-}
-
-async function fetchJson<T>(url: string): Promise<T> {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`${url} returned HTTP ${response.status}`);
-  }
-  return response.json() as Promise<T>;
-}
+const health = document.querySelector('#health')!;
+const form = document.querySelector('form')!;
+const list = document.querySelector('#questions')!;
 
 async function refresh() {
-  try {
-    const health = await fetchJson<Health>('/api/health');
-    healthElement.textContent = `API OK · ${health.db}`;
+  const status = await fetch('/api/health').then((r) => r.json());
+  health.textContent = `API OK · ${status.db}`;
 
-    const questions = await fetchJson<Question[]>('/api/questions');
-    questionsElement.replaceChildren(
-      ...questions.map((question) => {
-        const item = document.createElement('li');
-        item.textContent = `${question.question} → ${question.answer}`;
-        return item;
-      }),
-    );
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    healthElement.textContent = `Connexion impossible · ${message}`;
-    questionsElement.replaceChildren();
-  }
+  const questions: Question[] = await fetch('/api/questions').then((r) =>
+    r.json(),
+  );
+  list.replaceChildren(
+    ...questions.map((q) => {
+      const item = document.createElement('li');
+      item.textContent = `${q.question} → ${q.answer}`;
+      return item;
+    }),
+  );
 }
 
-void refresh();
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const question = new FormData(form).get('question');
+  await fetch('/api/questions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question }),
+  });
+  form.reset();
+  await refresh();
+});
+
+refresh();
