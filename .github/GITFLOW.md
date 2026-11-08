@@ -4,12 +4,12 @@ This project follows a simplified GitFlow workflow optimized for a 2-week hackat
 
 ## Branch Strategy
 
-| Branch | Purpose | Created from | Merged to |
-|--------|---------|--------------|-----------|
-| `main` | Demonstrable state (deployable) | `develop` or `hotfix/*` | N/A |
-| `develop` | Integration branch (default) | Feature branches | `main` |
-| `feature/*` | Individual tasks (1-2 days max) | `develop` | `develop` (via PR) |
-| `hotfix/*` | Urgent fixes to `main` | `main` | `main` and `develop` |
+| Branch      | Purpose                         | Created from            | Merged to            |
+| ----------- | ------------------------------- | ----------------------- | -------------------- |
+| `main`      | Demonstrable state (deployable) | `develop` or `hotfix/*` | N/A                  |
+| `develop`   | Integration branch (default)    | Feature branches        | `main`               |
+| `feature/*` | Individual tasks (1-2 days max) | `develop`               | `develop` (via PR)   |
+| `hotfix/*`  | Urgent fixes to `main`          | `main`                  | `main` and `develop` |
 
 ## Getting Started
 
