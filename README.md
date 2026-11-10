@@ -102,8 +102,7 @@ retourne `status: "ok"`.
 - Avant de committer, le hook `pre-commit` lance `lint-staged` (ESLint et
   Prettier) sur les fichiers concernés.
 - Les fichiers listés dans [CODEOWNERS](./.github/CODEOWNERS) déclenchent une
-  demande de revue aux tech leads. Leur approbation n'est pas encore imposée
-  séparément par GitHub.
+  demande de revue aux tech leads, et leur approbation est requise par GitHub.
 - La stratégie de branches et les règles de contribution sont détaillées dans
   [GITFLOW.md](./.github/GITFLOW.md) et
   [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
@@ -141,7 +140,6 @@ recevoir de données sensibles ou personnelles. Les tests automatisés métier n
 sont pas encore inclus.
 
 Les branches `main` et `develop` nécessitent une pull request, une approbation
-et le succès du check `qualite`. Les changements de configuration et
-d'environnement listés dans [CODEOWNERS](./.github/CODEOWNERS) sont attribués à
-l'équipe `tech-leads` afin qu'elle puisse valider les décisions qui affectent
-l'ensemble du projet.
+et le succès du check `qualite`. Pour les fichiers listés dans
+[CODEOWNERS](./.github/CODEOWNERS), cette approbation doit venir de l'équipe
+`tech-leads`, qui valide les décisions affectant l'ensemble du projet.
