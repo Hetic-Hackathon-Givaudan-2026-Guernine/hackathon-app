@@ -62,7 +62,7 @@ Even administrators must go through pull requests.
 
 ## Code Owners
 
-The following files require approval from a tech-lead before merging:
+The following files automatically request review from the `tech-leads` team:
 
 - `/.devcontainer/` - Development environment
 - `/.github/` - Repository configuration
@@ -71,6 +71,11 @@ The following files require approval from a tech-lead before merging:
 - `/package.json` - Dependencies
 
 Adding dependencies is a team decision—always go through a PR.
+
+Both `main` and `develop` require at least one approval. The additional GitHub
+setting that makes a CODEOWNERS approval mandatory should be enabled once the
+`tech-leads` team has at least two members, so that a team member who opens a PR
+can still receive an independent approval.
 
 ## Testing Before Merge
 
